@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14
+    container_name: welth-wealth-db
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=welth-wealth
+      - POSTGRES_PASSWORD=welth-wealth
+volumes:
+  db-store:
+    name: welth-wealth-volume 
