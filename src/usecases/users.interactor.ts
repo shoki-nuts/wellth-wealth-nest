@@ -1,8 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common"
-import { constants } from "buffer"
 import { User } from "src/domain/models/user.entity"
-import { UserRepository } from "src/infrastructure/repositories/userRepository"
-import { getUserDto } from "src/interfase/dtos/user.dto"
+import { UserRepository } from "src/repositories/userRepository"
+import { PostUserDto } from "src/dtos/user.dto"
 
 @Injectable()
 export class usersInteractor {
@@ -12,6 +11,10 @@ export class usersInteractor {
     ){}
 
     async getUsers(): Promise<User[]>{
-        return this.userRepository.findAll();
+        return await this.userRepository.findAll()
+    }
+
+    async postUser(userDto: PostUserDto){
+        await this.userRepository.create(userDto)
     }
 }
