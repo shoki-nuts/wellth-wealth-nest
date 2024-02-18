@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from '@nestjs/common';
 import { usersInteractor } from 'src/usecases/users.interactor';
 import { User } from 'src/domain/models/user.entity';
-import { PostUserDto } from '../dtos/user.dto';
+import { PostUserDto, UpdateUserDto } from '../dtos/user.dto';
 
 @Controller('user')
 export class UsersController {
@@ -18,5 +18,15 @@ export class UsersController {
     @Post()
     async postUser(@Body() userDto: PostUserDto) {
         await this.userInteractor.postUser(userDto);
+    }
+
+    @Put()
+    async putUser(@Body() userDto: UpdateUserDto) {
+        await this.userInteractor.updateUser(userDto);
+    }
+
+    @Delete()
+    async deleteUser(@Body() id: number) {
+        await this.userInteractor.deleteUser(id);
     }
 }
